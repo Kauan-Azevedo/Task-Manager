@@ -1,7 +1,4 @@
-from django.urls import path
+from django.http import HttpResponse
 
-from . import views
-
-urlpatterns = [
-    path("", views.IndexView, name="index"),
-]
+def index(request):
+    return HttpResponse("Hello, world! Task")
