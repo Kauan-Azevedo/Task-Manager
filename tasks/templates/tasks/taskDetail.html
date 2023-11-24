@@ -1,0 +1,11 @@
+<div>
+  <h2>Titulo: {{task.title}}</h2>
+  <span>Status: {{task.status}}</span>
+  <p>Descrição: {{task.description}}</p>
+  <p>
+    Pessoa Associada:
+    <br />
+    {% for person in task.person.all %} {{person.name}} <br />
+    {% endfor %}
+  </p>
+</div>

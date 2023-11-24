@@ -4,10 +4,15 @@
   <li>
     <a href="{% url 'tasks:taskDetail' task_id=task.id %}">
       <h1>{{task.title}}</h1>
-      <span>Status: {{task.status}}</span>
-      <p>{{task.description}}</p>
-      <p>{{task.person}}</p>
     </a>
+    <span>Status: {{task.status}}</span>
+    <p>Descrição: {{task.description}}</p>
+    <p>
+      Pessoa Associada:
+      <br />
+      {% for person in task.person.all %} {{person.name}} <br />
+      {% endfor %}
+    </p>
   </li>
   {% endfor %}
 </ul>
