@@ -1,24 +1,26 @@
 {% if taskList %}
-<ul>
-  {% for task in taskList %}
-  <li>
-    <a href="{% url 'tasks:taskDetail' task_id=task.id %}">
-      <h1>{{task.title}}</h1>
-    </a>
-    <span
-      >Status: {% if task.status == 0 %} Pendente {% else %} Concluida {% endif
-      %}
-    </span>
-    <p>Descrição: {{task.description}}</p>
-    <p>
-      Pessoa Associada:
-      <br />
-      {% for person in task.person.all %} {{person.name}} <br />
-      {% endfor %}
-    </p>
-  </li>
-  {% endfor %}
-</ul>
+  <ul>
+    {% for task in taskList %}
+      <li>
+        <a href="{% url 'tasks:taskDetail' task_id=task.id %}">
+          <h1>{{ task.title }}</h1>
+        </a>
+        <span>
+          Status: {% if task.status == 0 %} Pendente {% else %} Concluida {% endif %}
+        </span>
+        <p>Descrição: {{ task.description }}</p>
+        <p>
+          Pessoa Associada:
+          <br />
+          {% for person in task.person.all %}
+            <p>
+              {{ person.name }}
+            </p>
+          {% endfor %}
+        </p>
+      </li>
+    {% endfor %}
+  </ul>
 {% else %}
-<p>Nenhuma task econtrada</p>
+  <p>Nenhuma task encontrada</p>
 {% endif %}
