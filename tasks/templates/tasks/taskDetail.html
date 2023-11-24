@@ -1,6 +1,9 @@
 <div>
   <h2>Titulo: {{task.title}}</h2>
-  <span>Status: {{task.status}}</span>
+  <span
+    >Status: {% if task.status == 0 %} Pendente {% else %} Concluida {% endif %}
+  </span>
+
   <p>Descrição: {{task.description}}</p>
   <p>
     Pessoa Associada:
