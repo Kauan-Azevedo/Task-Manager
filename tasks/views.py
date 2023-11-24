@@ -1,7 +1,7 @@
-from django.http import HttpResponse
-from django.views import View
+from django.urls import path
 
-class IndexView(View):
-    def get(self, request):
-        return HttpResponse("Hello, world! Task")
+from . import views
 
+urlpatterns = [
+    path("", views.IndexView, name="index"),
+]
