@@ -6,7 +6,7 @@
 
 {% block content %}
   <section>
-    <button onclick="history.back()">Voltar</button>
+    <button class="goBack-btn" onclick="history.back()">Voltar</button>
     <form action="/add/task/" method="POST">
       {% csrf_token %}
       <h2>Adicionar Tarefa</h2>

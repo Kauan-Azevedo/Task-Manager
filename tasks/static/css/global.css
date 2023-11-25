@@ -30,9 +30,9 @@ ul {
 }
 
 section {
-    padding: 2.5rem;
     display: flex;
     flex-direction: column;
+    padding: 2.5rem;
 }
 
 .goBack-btn {
@@ -53,4 +53,25 @@ section {
 .goBack-btn:hover{
     --primary-color: rgb(204, 78, 56);
     width: 11rem;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 999rem;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary-color);
 }
