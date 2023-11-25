@@ -1,0 +1,35 @@
+<div>
+  <button onclick="history.back()">Voltar</button>
+  <form action="/add/task/" method="POST">
+    {% csrf_token %}
+    <h2>Adicionar Tarefa</h2>
+    <label for="title">
+      <span>Titulo</span>
+      <input id="title" name="title" type="text" required />
+    </label>
+    <label for="description">
+      <span>Descrição</span>
+      <input id="description" name="description" type="text" required />
+    </label>
+    <label for="status">
+      <span>Status</span>
+      <select id="status" name="status" required disabled>
+        <option value="0" selected>Pendente</option>
+      </select>
+      <input type="hidden" name="status" value="0" /> {% comment %} input
+      invisivel para conseguir enviar sem erros {% endcomment %}
+    </label>
+    <label for="person">
+      <span>Pessoa(s) Associada(s)</span>
+      <select id="person" name="person" required multiple>
+        {% for name in person %}
+        <option value="{{ name }}">{{ name }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <div>
+      <input type="submit" value="Criar" />
+      <input type="button" value="Limpar" />
+    </div>
+  </form>
+</div>
