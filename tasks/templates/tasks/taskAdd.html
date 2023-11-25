@@ -3,6 +3,11 @@
 {% block pageTitle %}
     Adicionar Tarefa
 {% endblock pageTitle %}
+{% block localCss %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/taskAdd.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/input.css' %}" />
+{% endblock localCss %}
 
 {% block content %}
   <section>
@@ -10,13 +15,13 @@
     <form action="/add/task/" method="POST">
       {% csrf_token %}
       <h2>Adicionar Tarefa</h2>
-      <label for="title">
-        <span>Titulo</span>
-        <input id="title" name="title" type="text" required />
+      <label for="title" class="label">
+        <input id="title" class="input" name="title" type="text" autoComplete="off" required />
+        <span class="span">Titulo</span>
       </label>
-      <label for="description">
-        <span>Descrição</span>
-        <input id="description" name="description" type="text" required />
+      <label for="description" class="label">
+        <input id="description" class="input" name="description" type="text" autoComplete="off" required />
+        <span class="span">Descrição</span>
       </label>
       <label for="status">
         <span>Status</span>
@@ -28,15 +33,15 @@
       </label>
       <label for="person">
         <span>Pessoa(s) Associada(s)</span>
-        <select id="person" name="person" required multiple>
+        <select id="person" name="person" class="multiple-person" required multiple>
           {% for name in person %}
           <option value="{{ name }}">{{ name }}</option>
           {% endfor %}
         </select>
       </label>
-      <div>
+      <div class="btn-group">
         <input type="submit" value="Criar" />
-        <input type="button" value="Limpar" />
+        <input type="button" value="Limpar" onclick="window.location.reload()" />
       </div>
     </form>
   </section>
