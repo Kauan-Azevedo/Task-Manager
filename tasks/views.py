@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 
 def getTasks(request):
     taskList = Task.objects.all()
-    return render(request, 'tasks/index.html', {'taskList': taskList})
+    return render(request, 'tasks/listTasks.html', {'taskList': taskList})
 
 def getById(request, task_id):
     try:
