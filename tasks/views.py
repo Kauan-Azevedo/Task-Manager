@@ -73,6 +73,6 @@ def taskDelete(request, task_id):
 
     if request.method == "POST":
         task.delete()
-        return redirect("tasks:listTasks")
+        return redirect("tasks:taskList")
 
     return render(request, 'tasks/taskDelete.html', {"task": task})
