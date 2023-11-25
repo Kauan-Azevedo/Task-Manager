@@ -4,15 +4,16 @@ from django.shortcuts import render, redirect
 
 
 def getTasks(request):
-    taskList = Task.objects.all()
+    taskList = Task.objects.all().order_by('-id').values()
     return render(request, 'tasks/listTasks.html', {'taskList': taskList})
 
 def getById(request, task_id):
     try:
+        person = Person.objects.all()
         task = Task.objects.get(pk=task_id)
     except Task.DoesNotExist:
         raise Http404("a task que voce procura não existe")
-    return render(request, 'tasks/taskDetail.html', {"task": task})
+    return render(request, 'tasks/taskDetail.html', {"task": task, "person": person})
 
 def taskAdd(request):
     person = Person.objects.all()
