@@ -1,28 +1,16 @@
-
-<a href="{% url 'tasks:taskAdd' %}">Adicionar tarefa</a>
-{% if taskList %}
-  <ul>
-    {% for task in taskList %}
-      <li>
-        <a href="{% url 'tasks:taskDetail' task_id=task.id %}">
-          <h1>{{ task.title }}</h1>
-        </a>
-        <span>
-          Status: {% if task.status == 0 %} Pendente {% else %} Concluida {% endif %}
-        </span>
-        <p>Descrição: {{ task.description }}</p>
-        <p>
-          Pessoa Associada:
-          <br />
-          {% for person in task.person.all %}
-            <p>
-              {{ person.name }}
-            </p>
-          {% endfor %}
-        </p>
-      </li>
-    {% endfor %}
-  </ul>
-{% else %}
-  <p>Nenhuma tarefa encontrada</p>
-{% endif %}
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Gerenciador de Tarefas |{%block pageTitle %} Home {% endblock pageTitle%}
+    </title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/global.css' %}" />
+  </head>
+  <body>
+    {% block content %}{% endblock content %}
+    <script src="{% static 'js/script.js' %}"></script>
+  </body>
+</html>
