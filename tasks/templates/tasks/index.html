@@ -1,3 +1,5 @@
+
+<a href="{% url 'tasks:taskAdd' %}">Adicionar tarefa</a>
 {% if taskList %}
   <ul>
     {% for task in taskList %}
@@ -22,5 +24,5 @@
     {% endfor %}
   </ul>
 {% else %}
-  <p>Nenhuma task encontrada</p>
+  <p>Nenhuma tarefa encontrada</p>
 {% endif %}
