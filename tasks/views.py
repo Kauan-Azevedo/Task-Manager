@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 
 
 def getTasks(request):
-    taskList = Task.objects.all().order_by('-id').values()
+    taskList = Task.objects.all().order_by('-id')
     return render(request, 'tasks/listTasks.html', {'taskList': taskList})
 
 def getById(request, task_id):
