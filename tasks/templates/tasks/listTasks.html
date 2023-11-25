@@ -3,35 +3,42 @@
 {% block pageTitle %}
     Todas as Tarefas
 {% endblock pageTitle %}
+{% block localCss %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/taskList.css' %}" />
+{% endblock localCss %}
 
 {% block content %}
     <section>
-        <a href="{% url 'tasks:taskAdd' %}">Adicionar tarefa</a>
+        <a class="add-btn" href="{% url 'tasks:taskAdd' %}">Adicionar tarefa</a>
         {% if taskList %}
-        <ul>
-            {% for task in taskList %}
-            <li>
-                <a href="{% url 'tasks:taskDetail' task_id=task.id %}">
-                <h1>{{ task.title }}</h1>
-                </a>
-                <span>
-                Status: {% if task.status == 0 %} Pendente {% else %} Concluida {% endif %}
-                </span>
-                <p>Descrição: {{ task.description }}</p>
-                <p>
-                Pessoa Associada:
-                <br />
-                {% for person in task.person.all %}
-                    <p>
-                    {{ person.name }}
-                    </p>
+            <ul class="tasks-container">
+                {% for task in taskList %}
+                    <a class="task-card" href="{% url 'tasks:taskDetail' task_id=task.id %}">
+                        <li>
+                            <h2>{{task.title}}</h2>
+                            <p><span>Status:</span>
+                                {% if task.status == 0 %}
+                                    <span style="color:orange;">Pendente</span>
+                                {% else %}
+                                    <span style="color: darkgreen;">Concluida</span>
+                                {% endif %}
+                            </p>
+                            <p><span>Descrição:</span>
+                                {{ task.description }}
+                            </p>
+                            <p><span>Pessoa(s) Associada(s):</span>
+                            {% for person in task.person.all %}
+                                <p>
+                                    {{ person.name }}
+                                </p>
+                            {% endfor %}
+                        </li>
+                    </a>
                 {% endfor %}
-                </p>
-            </li>
-            {% endfor %}
-        </ul>
+            </ul>
         {% else %}
-        <p>Nenhuma tarefa encontrada</p>
+            <p>Nenhuma tarefa encontrada</p>
         {% endif %}
     </section>
 {% endblock content %}
