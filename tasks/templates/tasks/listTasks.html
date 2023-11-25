@@ -5,31 +5,33 @@
 {% endblock pageTitle %}
 
 {% block content %}
-    <a href="{% url 'tasks:taskAdd' %}">Adicionar tarefa</a>
-    {% if taskList %}
-    <ul>
-        {% for task in taskList %}
-        <li>
-            <a href="{% url 'tasks:taskDetail' task_id=task.id %}">
-            <h1>{{ task.title }}</h1>
-            </a>
-            <span>
-            Status: {% if task.status == 0 %} Pendente {% else %} Concluida {% endif %}
-            </span>
-            <p>Descrição: {{ task.description }}</p>
-            <p>
-            Pessoa Associada:
-            <br />
-            {% for person in task.person.all %}
+    <section>
+        <a href="{% url 'tasks:taskAdd' %}">Adicionar tarefa</a>
+        {% if taskList %}
+        <ul>
+            {% for task in taskList %}
+            <li>
+                <a href="{% url 'tasks:taskDetail' task_id=task.id %}">
+                <h1>{{ task.title }}</h1>
+                </a>
+                <span>
+                Status: {% if task.status == 0 %} Pendente {% else %} Concluida {% endif %}
+                </span>
+                <p>Descrição: {{ task.description }}</p>
                 <p>
-                {{ person.name }}
+                Pessoa Associada:
+                <br />
+                {% for person in task.person.all %}
+                    <p>
+                    {{ person.name }}
+                    </p>
+                {% endfor %}
                 </p>
+            </li>
             {% endfor %}
-            </p>
-        </li>
-        {% endfor %}
-    </ul>
-    {% else %}
-    <p>Nenhuma tarefa encontrada</p>
-    {% endif %}
+        </ul>
+        {% else %}
+        <p>Nenhuma tarefa encontrada</p>
+        {% endif %}
+    </section>
 {% endblock content %}
