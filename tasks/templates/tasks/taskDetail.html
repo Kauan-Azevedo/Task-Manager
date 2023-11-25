@@ -1,12 +1,12 @@
 {% extends "./index.html" %}
 
 {% block pageTitle %}
-    Adicionar Tarefa
+    Visualizar Tarefa
 {% endblock pageTitle %}
 
 
 {% block content %}
-  <div>
+  <section>
     <button onclick="history.back()">Voltar</button>
     <h2>Titulo: {{task.title}}</h2>
     <span
@@ -20,5 +20,5 @@
       {% for person in task.person.all %} {{person.name}} <br />
       {% endfor %}
     </p>
-  </div>
+  </section>
 {% endblock content %}

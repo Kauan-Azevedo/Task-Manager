@@ -5,7 +5,7 @@
 {% endblock pageTitle %}
 
 {% block content %}
-  <div>
+  <section>
     <button onclick="history.back()">Voltar</button>
     <form action="/add/task/" method="POST">
       {% csrf_token %}
@@ -39,5 +39,5 @@
         <input type="button" value="Limpar" />
       </div>
     </form>
-  </div>
+  </section>
 {% endblock content %}
