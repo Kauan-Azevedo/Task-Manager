@@ -41,7 +41,7 @@
         
         <select id="person" name="person" class="multiple-person" style="display: none;" multiple>
           {% for name in person %}
-          <option value="{{ name }}" selected>{{ name }}</option>
+            <option value="{{ name }}" selected>{{ name }}</option>
           {% endfor %}
         </select>
         
@@ -52,8 +52,11 @@
           <button type="submit" id="confirmBtn">Confirmar</button>
           <button type="button" onclick="window.location.reload()">Cancelar</button>
         </div>
-        <button type="button" id="deleteBtn">Excluir Tarefa</button>
+        <button type="button" id="deleteConfirmBtn">Excluir Tarefa</button>
       </div>
+    </form>
+    <form method="POST" action="{% url 'tasks:taskDelete' task_id=task.id %}" id="deleteForm" style="display: none;">
+      {% csrf_token %}
     </form>
   </section>
 
@@ -67,6 +70,14 @@
       document.getElementById('status').disabled = false;
       document.getElementsByClassName('multiple-person')[0].style.display = 'none'
       document.getElementsByClassName('multiple-person')[1].style.display = 'initial'
+    });
+
+    document.getElementById('deleteConfirmBtn').addEventListener('click', function () {
+      const shouldDelete = confirm("Tem certeza de que deseja excluir esta tarefa?");
+      
+      if (shouldDelete) {
+        document.getElementById('deleteForm').submit();
+      }
     });
   </script> 
 
