@@ -1,0 +1,66 @@
+.task-container {
+    width: 100%;
+    max-width: 30rem;
+    min-height: 30rem;
+    margin: 1rem auto;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 1rem #33333375;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .7rem;
+}
+
+.label .span {
+    position: absolute;
+    top: -10px;
+    left: 90px;
+    padding: 5px;
+    color: #3333337e;
+    user-select: none;
+    font-size: 12px;
+    font-weight: bold;
+    transition: 250ms;
+    pointer-events: none;
+}
+
+label select {
+    width: 100%;
+    max-width: 300px;
+    outline: transparent;
+    padding: 0px 7px;
+    border: 2px solid #33333382;
+    color: var(--text-color);
+    border: none;
+}
+
+label .multiple-person {
+    min-height: 7rem;
+}
+
+.btn-group{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-top: auto;
+}
+
+.btn-group button {
+    width: 7rem;
+    height: 2rem;
+    text-align: center;
+    margin-left: auto;
+    padding: .55rem 0;
+    color: #fff;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 999rem;
+    box-shadow: 0 0 1rem #33333360;
+    transition: 250ms;
+    cursor: pointer;
+}
+
+.btn-group button:hover {
+    background-color: var(--secondary-color);
+}

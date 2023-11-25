@@ -3,22 +3,71 @@
 {% block pageTitle %}
     Visualizar Tarefa
 {% endblock pageTitle %}
+{% block localCss %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/input.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/taskDetail.css' %}" />
+{% endblock localCss %}
 
 
 {% block content %}
   <section>
-    <button onclick="history.back()">Voltar</button>
-    <h2>Titulo: {{task.title}}</h2>
-    <span
-      >Status: {% if task.status == 0 %} Pendente {% else %} Concluida {% endif %}
-    </span>
-
-    <p>Descrição: {{task.description}}</p>
-    <p>
-      Pessoa Associada:
-      <br />
-      {% for person in task.person.all %} {{person.name}} <br />
-      {% endfor %}
-    </p>
+    <button class="goBack-btn" onclick="history.back()">Voltar</button>
+    <form class="task-container" action="{% url 'tasks:taskUpdate' task_id=task.id %}" method="POST">
+      {% csrf_token %}
+      <h2>Visualizar Tarefa</h2>
+      <label for="title" class="label">
+        <input id="title" class="input input-validated" name="title" type="text" value="{{task.title}}" disabled/>
+        <span class="span">Titulo</span>
+      </label>
+      <label for="description" class="label">
+        <input id="description" class="input" name="description" type="text" value="{{task.description}}" disabled/>
+        <span class="span">Descrição</span>
+      </label>
+      <label for="status">
+        <span>Status</span>
+        <select id="status" name="status" required disabled>
+          <option value="0" {% if task.status == 0 %}selected{% endif %}>Pendente</option>
+          <option value="1" {% if task.status == 1 %}selected{% endif %}>Concluída</option>
+        </select>
+      </label>
+      <label for="person">
+        <span>Pessoa(s) Associada(s)</span>
+        <select id="person" name="person" class="multiple-person" multiple disabled>
+          {% for person_instance in task.person.all %}
+          <option value="{{ person_instance.name }}" selected>{{ person_instance.name }}</option>
+          {% endfor %}
+        </select>
+        
+        <select id="person" name="person" class="multiple-person" style="display: none;" multiple>
+          {% for name in person %}
+          <option value="{{ name }}" selected>{{ name }}</option>
+          {% endfor %}
+        </select>
+        
+      </label>
+      <div class="btn-group">
+        <button type="button" id="editBtn">Editar Tarefa</button>
+        <div id="editFields" style="display: none;">
+          <button type="submit" id="confirmBtn">Confirmar</button>
+          <button type="button" onclick="window.location.reload()">Cancelar</button>
+        </div>
+        <button type="button" id="deleteBtn">Excluir Tarefa</button>
+      </div>
+    </form>
   </section>
+
+  <script>
+    document.getElementById('editBtn').addEventListener('click', function () {
+      document.getElementById('editFields').style.display = 'block';
+      document.getElementById('editBtn').style.display = "none";
+      document.getElementById('deleteBtn').style.display = "none";
+      document.getElementById('title').disabled = false;
+      document.getElementById('description').disabled = false;
+      document.getElementById('status').disabled = false;
+      document.getElementsByClassName('multiple-person')[0].style.display = 'none'
+      document.getElementsByClassName('multiple-person')[1].style.display = 'initial'
+    });
+  </script> 
+
 {% endblock content %}
