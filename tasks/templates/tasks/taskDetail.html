@@ -1,15 +1,24 @@
-<div>
-  <button onclick="history.back()">Voltar</button>
-  <h2>Titulo: {{task.title}}</h2>
-  <span
-    >Status: {% if task.status == 0 %} Pendente {% else %} Concluida {% endif %}
-  </span>
+{% extends "./index.html" %}
 
-  <p>Descrição: {{task.description}}</p>
-  <p>
-    Pessoa Associada:
-    <br />
-    {% for person in task.person.all %} {{person.name}} <br />
-    {% endfor %}
-  </p>
-</div>
+{% block pageTitle %}
+    Adicionar Tarefa
+{% endblock pageTitle %}
+
+
+{% block content %}
+  <div>
+    <button onclick="history.back()">Voltar</button>
+    <h2>Titulo: {{task.title}}</h2>
+    <span
+      >Status: {% if task.status == 0 %} Pendente {% else %} Concluida {% endif %}
+    </span>
+
+    <p>Descrição: {{task.description}}</p>
+    <p>
+      Pessoa Associada:
+      <br />
+      {% for person in task.person.all %} {{person.name}} <br />
+      {% endfor %}
+    </p>
+  </div>
+{% endblock content %}
