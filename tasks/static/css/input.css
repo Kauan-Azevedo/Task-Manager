@@ -1,0 +1,57 @@
+.input {
+    width: 100%;
+    max-width: 300px;
+    outline: transparent;
+    padding: 0px 7px;
+    border: 2px solid #33333382;
+    color: var(--text-color);
+}
+
+.label {
+    width: 100%;
+    height: 45px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.label .span {
+    position: absolute;
+    top: 10px;
+    left: 90px;
+    padding: 5px;
+    color: #3333337e;
+    user-select: none;
+    font-size: 13px;
+    /* font-weight: bold; */
+    transition: 250ms;
+    pointer-events: none;
+}
+
+.label .input:focus,
+.label .input:valid {
+    border: 2px solid var(--primary-color);
+
+}
+
+.label .input[type="datetime-local"]~.span {
+    color: inherit;
+    top: -10px;
+    font-size: 12px;
+}
+
+:is(.label .input[type="datetime-local"]:focus~.span,
+    .label .input[type="datetime-local"]:valid~.span,
+    .label .input:focus~.span,
+    .label .input:valid~.span) {
+    color: var(--primary-color);
+    top: -10px;
+    font-size: 12px;
+}
+
+.label .input {
+    height: 30px;
+    border-radius: 999px;
+}
