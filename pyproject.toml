@@ -12,6 +12,8 @@ python = "^3.10"
 psycopg = "^3.1.13"
 Django = "^4.2.7"
 python-decouple = "^3.8"
+djangorestframework = "^3.14.0"
+drf-yasg = "^1.21.7"
 
 [tool.poetry.dev-dependencies]
 

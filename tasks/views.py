@@ -1,6 +1,11 @@
 from django.http import Http404
 from .models import Task, Person
+from .models import Task, Person
 from django.shortcuts import render, redirect
+
+from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, UpdateAPIView, DestroyAPIView
+from .serializers import TaskSerializer, PersonSerializer
+
 
 
 def getTasks(request):
@@ -135,3 +140,75 @@ def personDelete(request, person_id):
         return redirect("tasks:personList")
 
     return render(request, 'tasks/personDelete.html', {"person": person})
+
+# Django rest Framework API
+
+class TaskListView(ListAPIView):
+    """
+    API endpoint that shows all tasks created in descending order.
+    """
+    queryset = Task.objects.all().order_by('-id')
+    serializer_class = TaskSerializer
+
+class TaskDetailView(RetrieveAPIView):
+    """
+    API endpoint that allows viewing a task by its ID.
+    """
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+
+class TaskCreateView(CreateAPIView):
+    """
+    API endpoint that allows creating a task.
+    """
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+
+class TaskUpdateView(UpdateAPIView):
+    """
+    API endpoint that allows updating task data.
+    """
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+
+class TaskDeleteView(DestroyAPIView):
+    """
+    API endpoint that allows deleting a task.
+    """
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+
+class PersonListView(ListAPIView):
+    """
+    API endpoint that shows all persons.
+    """
+    queryset = Person.objects.all()
+    serializer_class = PersonSerializer
+
+class PersonDetailView(RetrieveAPIView):
+    """
+    API endpoint that allows viewing a person by their ID.
+    """
+    queryset = Person.objects.all()
+    serializer_class = PersonSerializer
+
+class PersonCreateView(CreateAPIView):
+    """
+    API endpoint that allows creating a person.
+    """
+    queryset = Person.objects.all()
+    serializer_class = PersonSerializer
+
+class PersonUpdateView(UpdateAPIView):
+    """
+    API endpoint that allows updating person data.
+    """
+    queryset = Person.objects.all()
+    serializer_class = PersonSerializer
+
+class PersonDeleteView(DestroyAPIView):
+    """
+    API endpoint that allows deleting a person.
+    """
+    queryset = Person.objects.all()
+    serializer_class = PersonSerializer
