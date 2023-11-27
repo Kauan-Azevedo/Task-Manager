@@ -11,6 +11,11 @@
     {% block localCss %}{% endblock localCss %}
   </head>
   <body>
+    <div class="header">
+      <a class="add-btn" href="{% url 'tasks:taskList' %}">Lista de Tarefas</a>
+      <a class="add-btn" href="{% url 'tasks:personList' %}">Lista de Pessoas</a>
+      {% block header %}{% endblock header %}
+  </div>
     {% block content %}{% endblock content %}
     <script src="{% static 'js/script.js' %}"></script>
   </body>
