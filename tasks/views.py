@@ -141,7 +141,7 @@ def personDelete(request, person_id):
 
     return render(request, 'tasks/personDelete.html', {"person": person})
 
-# Django rest Framework API
+# Django rest Framework AP
 
 class TaskListView(ListAPIView):
     """
