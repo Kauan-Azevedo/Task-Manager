@@ -39,7 +39,6 @@ section {
     width: 10rem;
     height: 2rem;
     text-align: center;
-    margin-left: auto;
     padding: .55rem 0;
     color: #fff;
     background-color: var(--primary-color);
@@ -53,6 +52,31 @@ section {
 .goBack-btn:hover{
     --primary-color: rgb(204, 78, 56);
     width: 11rem;
+}
+
+.header{
+  min-height: 2rem;
+  padding: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.add-btn{
+  width: 10rem;
+  height: 2rem;
+  text-align: center;
+  padding: .55rem 0;
+  color: #fff;
+  background-color: var(--primary-color);
+  border-radius: 999rem;
+  box-shadow: 0 0 1rem #33333360;
+  transition: 250ms;
+}
+
+.add-btn:hover {
+  --primary-color: rgb(204, 78, 56);
+  width: 11rem;
 }
 
 /* width */

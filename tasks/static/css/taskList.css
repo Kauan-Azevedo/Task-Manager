@@ -6,24 +6,6 @@
     padding: .5rem;
 }
 
-.add-btn{
-    width: 10rem;
-    height: 2rem;
-    text-align: center;
-    margin-left: auto;
-    padding: .55rem 0;
-    color: #fff;
-    background-color: var(--primary-color);
-    border-radius: 999rem;
-    box-shadow: 0 0 1rem #33333360;
-    transition: 250ms;
-}
-
-.add-btn:hover {
-    --primary-color: rgb(204, 78, 56);
-    width: 11rem;
-}
-
 .task-card {
     width: 100%;
     max-width: 20rem;
