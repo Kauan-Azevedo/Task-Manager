@@ -8,9 +8,12 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/taskList.css' %}" />
 {% endblock localCss %}
 
+{% block header %}
+<a class="add-btn" href="{% url 'tasks:taskAdd' %}">Adicionar tarefa</a>
+{% endblock header %}
+
 {% block content %}
     <section>
-        <a class="add-btn" href="{% url 'tasks:taskAdd' %}">Adicionar tarefa</a>
         {% if taskList %}
             <ul class="tasks-container">
                 {% for task in taskList %}
