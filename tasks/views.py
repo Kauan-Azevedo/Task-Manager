@@ -5,9 +5,9 @@ from django.shortcuts import render, redirect
 
 def getTasks(request):
     taskList = Task.objects.all().order_by('-id')
-    return render(request, 'tasks/listTasks.html', {'taskList': taskList})
+    return render(request, 'tasks/taskList.html', {'taskList': taskList})
 
-def getById(request, task_id):
+def getTaskById(request, task_id):
     try:
         person = Person.objects.all()
         task = Task.objects.get(pk=task_id)
@@ -76,3 +76,62 @@ def taskDelete(request, task_id):
         return redirect("tasks:taskList")
 
     return render(request, 'tasks/taskDelete.html', {"task": task})
+
+# CRUD PESSOAS
+
+def getPersons(request):
+    personList = Person.objects.all().order_by('-id')
+    return render(request, 'persons/personList.html', {'personList': personList})
+
+def getPersonById(request, person_id):
+    try:
+        person = Person.objects.get(pk=person_id)
+    except Person.DoesNotExist:
+        raise Http404("a pessoa que voce procura não existe")
+    return render(request, 'persons/personDetail.html', {"person": person})
+
+def personAdd(request):
+    if request.method == "POST":
+        data = request.POST
+        
+        name = data.get("name")
+        role = data.get("role")
+        
+        new_person = Person.objects.create(
+            name=name,
+            role=role
+        )
+
+        new_person.save()
+        return redirect("tasks:personDetail", person_id=new_person.id)
+
+
+    return render(request, 'persons/personAdd.html', {"roles": {0: "Cliente", 1: "Colaborador"}})
+
+def personUpdate(request, person_id):
+    try:
+        person = Person.objects.get(pk=person_id)
+    except Person.DoesNotExist:
+        raise Http404("Pessoa inexistente!")
+
+    if request.method == "POST":
+        data = request.POST
+        person.name = data.get("name")
+        person.role = data.get("role")
+        
+        person.save()
+        return redirect("tasks:personDetail", person_id=person.id)
+
+    return render(request, 'tasks/taskUpdate.html', {"person": person, "status": {0: "Cliente", 1: "Colaborador"}})
+
+def personDelete(request, person_id):
+    try:
+        person = Person.objects.get(pk=person_id)
+    except Person.DoesNotExist:
+        raise Http404("Pessoa inexistente!")
+
+    if request.method == "POST":
+        person.delete()
+        return redirect("tasks:personList")
+
+    return render(request, 'tasks/personDelete.html', {"person": person})
