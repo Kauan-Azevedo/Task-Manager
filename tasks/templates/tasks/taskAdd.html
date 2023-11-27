@@ -9,9 +9,12 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/input.css' %}" />
 {% endblock localCss %}
 
+{% block header %}
+  <button class="goBack-btn" onclick="history.back()">Voltar</button>
+{% endblock header %}
+
 {% block content %}
   <section>
-    <button class="goBack-btn" onclick="history.back()">Voltar</button>
     <form action="/task/add/" method="POST">
       {% csrf_token %}
       <h2>Adicionar Tarefa</h2>

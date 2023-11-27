@@ -9,10 +9,12 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/taskDetail.css' %}" />
 {% endblock localCss %}
 
+{% block header %}
+<button class="goBack-btn" onclick="history.back()">Voltar</button>
+{% endblock header %}
 
 {% block content %}
   <section>
-    <button class="goBack-btn" onclick="history.back()">Voltar</button>
     <form class="task-container" action="{% url 'tasks:taskUpdate' task_id=task.id %}" method="POST">
       {% csrf_token %}
       <h2>Visualizar Tarefa</h2>
@@ -64,12 +66,12 @@
     document.getElementById('editBtn').addEventListener('click', function () {
       document.getElementById('editFields').style.display = 'block';
       document.getElementById('editBtn').style.display = "none";
-      document.getElementById('deleteBtn').style.display = "none";
+      document.getElementById('deleteConfirmBtn').style.display = "none";
       document.getElementById('title').disabled = false;
       document.getElementById('description').disabled = false;
       document.getElementById('status').disabled = false;
-      document.getElementsByClassName('multiple-person')[0].style.display = 'none'
-      document.getElementsByClassName('multiple-person')[1].style.display = 'initial'
+      document.getElementsByClassName('multiple-person')[0].style.display = 'none';
+      document.getElementsByClassName('multiple-person')[1].style.display = 'initial';
     });
 
     document.getElementById('deleteConfirmBtn').addEventListener('click', function () {
