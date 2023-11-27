@@ -1,0 +1,38 @@
+{% extends "./index.html" %}
+
+{% block pageTitle %}
+    Todas as Pessoas
+{% endblock pageTitle %}
+{% block localCss %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/taskList.css' %}" />
+{% endblock localCss %}
+
+{% block header %}
+    <a class="add-btn" href="{% url 'tasks:personAdd' %}">Adicionar pessoa</a>
+{% endblock header %}
+
+{% block content %}
+    <section>
+        {% if personList %}
+            <ul class="tasks-container">
+                {% for person in personList %}
+                    <a class="task-card" href="{% url 'tasks:personDetail' person_id=person.id %}">
+                        <li>
+                            <h2>{{person.name}}</h2>
+                            <p><span>Função:</span>
+                                {% if person.role == 0 %}
+                                    <span>Cliente</span>
+                                {% else %}
+                                    <span>Colaborador</span>
+                                {% endif %}
+                            </p>
+                        </li>
+                    </a>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="noTasks">Nenhuma pessoa encontrada...</p>
+        {% endif %}
+    </section>
+{% endblock content %}

@@ -1,0 +1,68 @@
+{% extends "./index.html" %}
+
+{% block pageTitle %}
+    Visualizar Pessoa
+{% endblock pageTitle %}
+{% block localCss %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/input.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/taskDetail.css' %}" />
+{% endblock localCss %}
+
+{% block header %}
+<button class="goBack-btn" onclick="history.back()">Voltar</button>
+{% endblock header %}
+
+{% block content %}
+  <section>
+    <form class="task-container" action="{% url 'tasks:personUpdate' person_id=person.id %}" method="POST">
+      {% csrf_token %}
+      <h2>Visualizar Pessoa</h2>
+      <label for="name" class="label">
+        <input id="name" class="input" name="name" type="text" autoComplete="off" value="{{person.name}}" required disabled/>
+        <span class="span">Name</span>
+      </label>
+      <label for="status">
+        <span>Função</span>
+        <select id="role" name="role" required disabled>
+            <option value="0" {% if person.role == 0 %}selected{% endif %}>Cliente</option>
+            <option value="1" {% if person.role == 1 %}selected{% endif %}>Colaborador</option>
+        </select>
+      </label>
+        
+      </label>
+      <div class="btn-group">
+        <button type="button" id="editBtn">Editar Pessoa</button>
+        <div id="editFields" style="display: none;">
+          <button type="submit" id="confirmBtn">Confirmar</button>
+          <button type="button" onclick="window.location.reload()">Cancelar</button>
+        </div>
+        <button type="button" id="deleteConfirmBtn">Excluir Pessoa</button>
+      </div>
+    </form>
+    <form method="POST" action="{% url 'tasks:personDelete' person_id=person.id %}" id="deleteForm" style="display: none;">
+      {% csrf_token %}
+    </form>
+  </section>
+
+  <script>
+    document.getElementById('editBtn').addEventListener('click', function () {
+      document.getElementById('editFields').style.display = 'block';
+      document.getElementById('editBtn').style.display = "none";
+      document.getElementById('deleteConfirmBtn').style.display = "none";
+      document.getElementById('name').disabled = false;
+      document.getElementById('role').disabled = false;
+      document.getElementsByClassName('multiple-person')[0].style.display = 'none';
+      document.getElementsByClassName('multiple-person')[1].style.display = 'initial';
+    });
+
+    document.getElementById('deleteConfirmBtn').addEventListener('click', function () {
+      const shouldDelete = confirm("Tem certeza de que deseja excluir esta pessoa?");
+      
+      if (shouldDelete) {
+        document.getElementById('deleteForm').submit();
+      }
+    });
+  </script> 
+
+{% endblock content %}

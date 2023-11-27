@@ -1,0 +1,43 @@
+{% extends "./index.html" %}
+
+{% block pageTitle %}
+    Adicionar Pessoa
+{% endblock pageTitle %}
+{% block localCss %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/taskAdd.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/input.css' %}" />
+{% endblock localCss %}
+
+{% block header %}
+  <button class="goBack-btn" onclick="history.back()">Voltar</button>
+{% endblock header %}
+
+{% block content %}
+  <section>
+    <form action="/person/add/" method="POST">
+      {% csrf_token %}
+      <h2>Adicionar Pessoa</h2>
+      <label for="name" class="label">
+        <input id="name" class="input" name="name" type="text" autoComplete="off" required />
+        <span class="span">Name</span>
+      </label>
+      <label for="role">
+        <span>Função</span>
+        <select id="role" name="role" required>
+            {% for role in roles %}
+                {% if role == 0 %}
+                    <option value="{{ role }}">Cliente</option>
+                {% else %}
+                    <option value="{{ role }}">Colaborador</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+      </label>
+      <div class="btn-group">
+        <input type="submit" value="Criar" />
+        <input type="button" value="Limpar" onclick="window.location.reload()" />
+      </div>
+    </form>
+  </section>
+{% endblock content %}
